@@ -16,5 +16,8 @@ namespace DrugVerizone.Entities
         public DateTime CreatedAt { get; set; }
 
         public Guid? RoleId { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsVerified { get; set; }
+        public virtual Roles Role { get; set; }
     }
 }

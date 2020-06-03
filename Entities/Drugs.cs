@@ -16,8 +16,11 @@ namespace DrugVerizone.Entities
         public DateTime ManFactureDate { get; set; }
         public DateTime ExpiryDate { get; set; }
 
-        public Manufacturer manufacturerId { get; set; }
+        public Guid? manufacturerId { get; set; }
 
         public DateTime RegisteredDate { get; set; }
+
+        public virtual Manufacturer Manufacturer { get; set; }
+
     }
 }
