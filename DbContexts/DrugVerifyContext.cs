@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DrugVerizone.Models;
 
 namespace DrugVerizone.DbContexts
 {
@@ -20,5 +21,6 @@ namespace DrugVerizone.DbContexts
         public virtual DbSet<Pins> Pins { get; set; }
         public virtual DbSet<Drugs> Drugs { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<DrugVerizone.Models.DrugCreateDto> DrugCreateDto { get; set; }
     }
 }

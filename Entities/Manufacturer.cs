@@ -8,6 +8,10 @@ namespace DrugVerizone.Entities
     public class Manufacturer
     {
 
+        public Manufacturer()
+        {
+            Drugs = new HashSet<Drugs>();
+        }
         public Guid Id { get; set; }
 
         public string CompanyName { get; set; }
@@ -20,5 +24,10 @@ namespace DrugVerizone.Entities
         public string certificateOfReg { get; set; }
 
         public DateTime RegistrationDate { get; set; }
+
+
+       
+
+        public virtual ICollection<Drugs> Drugs { get; set; }
     }
 }

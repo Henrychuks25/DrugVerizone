@@ -1,0 +1,25 @@
+﻿@model  IEnumerable<DrugsViewDto>;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+<table>
+
+        <thead>
+
+        </thead>
+        <tbody>
+            @foreach (var items in Model)
+            {
+               <tr>
+                   <td>@items.Name</td>
+                   <td>@items.NafdacNo</td>
+                   <td>@items.RegisteredDate</td>
+                   <td>@items.ManFactureDate</td>
+                   <td>@items.Manufacturer.CompanyName</td>
+               </tr>
+        }
+        </tbody>
+</table>

@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DrugVerizone.Classes;
 using DrugVerizone.DbContexts;
+using DrugVerizone.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace DrugVerizone
 {
@@ -26,12 +29,24 @@ namespace DrugVerizone
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("DrugVerify");
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddDbContext<DrugVerifyContext>(options => options.UseSqlServer(connection));
-
+            services.AddDbContext<DrugVerifyContext>(options => options.
+            UseLazyLoadingProxies()
+            .UseSqlServer(connection));
+           
             var connectionString = new ConnectionString(Configuration.GetConnectionString("DrugVerify"));
             services.AddSingleton(connectionString);
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                {
+                    //Fixing JSON Self Referencing Loop Exceptions
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                })
+                .AddRazorRuntimeCompilation();
+            services.AddScoped<IDrugsRepository, cDrugsRepository>();
+            services.AddScoped<IManufacturerRepository, cManufacturerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
