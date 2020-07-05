@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewData["Title"] </title>
+    @*<link rel="icon" type="image/png" href="http://webinfoways.co.in/projects/planex-pharmacy/images/favicon.png" sizes="16x16">*@
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Font Awesome CSS -->
+    <link href="~/lib/fontawesome-free/css/fontawesome.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link href="~/css/landing.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+
+
+    @*<div class="container">
+        <main role="main" class="pb-3">*@
+    @RenderBody()
+    @*</main>
+        </div*@>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - DrugVerizone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <!-- End wrapper -->
+    <!-- jquery latest version -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!-- popper.min js -->
+    <script src="~/js/Popper.js"></script>
+    <!-- bootstrap.min js -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- ie10 viewport bug-workaround js -->
+    @*<script src="http://webinfoways.co.in/projects/planex-pharmacy/js/ie10-viewport-bug-workaround.js"></script>*@
+
+    <!-- custom js -->
+    <script src="~/js/landing.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

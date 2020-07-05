@@ -7,7 +7,7 @@ namespace DrugVerizone.Models
 {
     public class ManufacturerUpdateDto
     {
-        public string CompanyName { get; set; }
+        public string Name { get; set; }
 
         public string Address { get; set; }
 

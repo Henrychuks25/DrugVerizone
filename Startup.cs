@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DrugVerizone.Classes;
 using DrugVerizone.DbContexts;
+using DrugVerizone.Entities;
 using DrugVerizone.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +36,10 @@ namespace DrugVerizone
             services.AddDbContext<DrugVerifyContext>(options => options.
             UseLazyLoadingProxies()
             .UseSqlServer(connection));
-           
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DrugVerifyContext>()
+                .AddDefaultTokenProviders();
+
             var connectionString = new ConnectionString(Configuration.GetConnectionString("DrugVerify"));
             services.AddSingleton(connectionString);
 
@@ -47,6 +52,8 @@ namespace DrugVerizone
                 .AddRazorRuntimeCompilation();
             services.AddScoped<IDrugsRepository, cDrugsRepository>();
             services.AddScoped<IManufacturerRepository, cManufacturerRepository>();
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

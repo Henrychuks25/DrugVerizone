@@ -1,6 +1,6 @@
 ﻿@model ManufacturerViewDto
 @{
-    ViewData["Title"] = Model.CompanyName;
+    ViewData["Title"] = Model.Name;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
 }
@@ -59,7 +59,7 @@
                                             <dl>
                                                 <dt>Company Name</dt>
                                                 <dd>
-                                                    @Model.CompanyName<br />
+                                                    @Model.Name<br />
 
                                                 </dd>
                                             </dl>

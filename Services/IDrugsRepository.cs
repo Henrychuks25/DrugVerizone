@@ -10,9 +10,10 @@ namespace DrugVerizone.Services
     {
         
         Task<DrugsViewDto> Create(DrugCreateDto drugs);
+        public Task<IEnumerable<ManufacturerViewDto>> GetMan();
         Task<DrugsViewDto> Delete(Guid drugID);
         Task<bool> DrugExist(Guid drugId);
-        Task<IEnumerable<DrugsViewDto>> Get();
+        public Task<IEnumerable<DrugsViewDto>> Get();
         
         Task<DrugsViewDto> ListById(Guid id);
         Task<bool> Save();

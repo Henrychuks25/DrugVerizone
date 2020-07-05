@@ -1,47 +1,187 @@
-﻿@model DrugVerizone.Models.DrugCreateDto
+﻿@model DrugVerizone.Models.DrugsViewDto
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>DrugCreateDto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h4>@ViewData["Title"]</h4>
             </div>
-            <div class="form-group">
-                <label asp-for="NafdacNo" class="control-label"></label>
-                <input asp-for="NafdacNo" class="form-control" />
-                <span asp-validation-for="NafdacNo" class="text-danger"></span>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-area="" asp-controller="Drugs" asp-action="Index">Manage Drugs</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
             </div>
-            <div class="form-group">
-                <label asp-for="ManFactureDate" class="control-label"></label>
-                <input asp-for="ManFactureDate" class="form-control" />
-                <span asp-validation-for="ManFactureDate" class="text-danger"></span>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+
+<!-- Main content -->
+<section class="content">
+
+
+    <div class="row">
+        <div class="col-12">
+            <!-- /.card -->
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+
+                    <small class="text-muted mt-1 mb-2">All fields marked <b class="text-danger">*</b> are required!</small>
+
+                    <form asp-action="Create" method="post" asp-controller="Drugs">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="form-group col-6-md">
+                                    <label asp-for="Name">*Drug Name:</label>
+                                    <input minlength="2" maxlength="50" asp-for="Name" class="form-control" placeholder="Enter Name of Drug" required>
+                                </div>
+
+                                <div class="form-group col-6-md">
+                                    <label asp-for="NafdacNo">*Nafdac No:</label>
+                                    <input minlength="2" maxlength="50" asp-for="NafdacNo" class="form-control" placeholder="Enter NAFDAC Number" required>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="form-group col-6-md">
+                                    <label asp-for="UniqueCode">*UniqueCode No:</label>
+                                    <input minlength="2" maxlength="50" asp-for="UniqueCode" class="form-control" placeholder="Enter Unique Code" required>
+                                    <span>This code is used to verify an original drug</span>
+                                </div>
+
+
+                                <div class="form-group col-6-md">
+                                    <label>Select Manufacturer</label>
+                                    <select class="form-control select2" style="width: 100%;" asp-for="ManufacturerId" asp-items="@(new SelectList(@ViewBag.manList,"Id", "Name"))">
+                                        <option value="0"> --- Select Manufacturer --- </option>
+
+                                    </select>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="form-group col-6-md">
+                                    <label asp-for="ManFactureDate">*Manufactured Date:</label>
+                                    <input minlength="2" maxlength="50" asp-for="ManFactureDate" class="form-control" required>
+                                </div>
+
+                                <div class="form-group col-6-md">
+                                    <label asp-for="ExpiryDate">*Expiry Date:</label>
+                                    <input minlength="2" maxlength="50" asp-for="ExpiryDate" class="form-control" required>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                        <!-- /.col -->
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-spinner fa-spin" id="loading_icon" style="display:none"></i>
+                            Submit
+                        </button>
+                        <button type="reset" class="btn btn-secondary btn-lg"> Reset</button>
+
+                        <!-- /.col -->
+
+                    </form>
+
+
+                </div>
+                <!-- /.card-body -->
             </div>
-            <div class="form-group">
-                <label asp-for="ExpiryDate" class="control-label"></label>
-                <input asp-for="ExpiryDate" class="form-control" />
-                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+</section>
+<!-- /.content -->
+
+
+
+
+
+
+@section Scripts {
+
+
+    <script>
+        $(document).ready(function () {
+            $('select.form-control').select2({
+                theme: 'bootstrap4'
+            });
+
+        });</script>
+
+    <script>
+
+        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg !== value;
+        }, "Select a valid value!");
+        $("form").validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                },
+
+
+
+            },
+            messages: {
+                Name: {
+                    required: "This field is required!",
+                    minlength: "This field must have at least 5 characters!",
+                    maxlength: "This field must have less than 50 characters!",
+                },
+
+
+            }
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

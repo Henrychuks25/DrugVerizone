@@ -1,3 +1,11 @@
 ﻿@using DrugVerizone
+@using DrugVerizone.Entities
 @using DrugVerizone.Models
+@using Microsoft.AspNetCore.Identity
+
+@using DrugVerizone.Models.AccountViewModels
+@using DrugVerizone.Models.ManageViewModels
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

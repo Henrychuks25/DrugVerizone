@@ -151,5 +151,15 @@ namespace DrugVerizone.Services
                 return await _context.Drugs.AnyAsync(d => d.Id == drugId);
             });
         }
+
+        public async Task<IEnumerable<ManufacturerViewDto>> GetMan()
+        {
+            return await Task.Run(async () =>
+            {
+                var result = await _context.Manufacturers.ToListAsync();
+                return _mapper.Map<IEnumerable<ManufacturerViewDto>>(result);
+
+            });
+        }
     }
 }

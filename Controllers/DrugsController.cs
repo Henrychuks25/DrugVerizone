@@ -43,8 +43,17 @@ namespace DrugVerizone.Controllers
         }
 
         // GET: Drugs/Create
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            // Get Category List
+            List<ManufacturerViewDto> manList = new List<ManufacturerViewDto>();
+
+            var man = await _drugsRepository.GetMan();
+            manList = (from c in man select c).ToList();
+
+            ViewBag.manList = manList;
+
+
             return View();
         }
        

@@ -4,7 +4,7 @@
 
 @{
 
-    ViewData["Title"] = "Available Available Manufacturers ";
+    ViewData["Title"] = "Available Manufacturers ";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -73,7 +73,7 @@
                             @foreach (var item in Model)
                             {
                                 <tr role="row">
-                                    <td>@(item.CompanyName != null ? item.CompanyName : "NOT STATED")</td>
+                                    <td>@(item.Name != null ? item.Name : "NOT STATED")</td>
                                   
 
                                     <td>

@@ -1,25 +1,128 @@
-﻿@model  IEnumerable<DrugsViewDto>;
+﻿@model IEnumerable<DrugsViewDto>;
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Available Drugs";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
-<table>
 
-        <thead>
 
-        </thead>
-        <tbody>
-            @foreach (var items in Model)
-            {
-               <tr>
-                   <td>@items.Name</td>
-                   <td>@items.NafdacNo</td>
-                   <td>@items.RegisteredDate</td>
-                   <td>@items.ManFactureDate</td>
-                   <td>@items.Manufacturer.CompanyName</td>
-               </tr>
-        }
-        </tbody>
-</table>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<h4>@ViewData["Title"]</h4>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+
+
+
+<section class="content">
+
+
+    <div class="row">
+        <div class="col-12">
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">List of @ViewData["Title"]</h5>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <div class="clearfix mb-3">
+                        <div class="float-right">
+                            <a asp-area="" asp-action="Create" class="btn btn-light">
+                                <span><i class="fa fa-plus"></i>  New Drug</span>
+
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+
+                        <thead>
+                            <tr role="row">
+                                <td>Name</td>
+
+
+
+                                <td>Manufactured By</td>
+                                <td>NAFDAC No</td>
+                                
+                                <td>Man. Date</td>
+                                <td>Exp. Date</td>
+                                <td>Unique Code</td>
+
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                           
+
+                            <tr role="row">
+                                <td>@(item.Name != null ? item.Name : "NOT STATED")</td>
+
+
+                                <td>
+                                    <span>@(item.Manufacturers.Name != null ? item.Manufacturers.Name : "NOT STATED")</span>
+                                </td>
+                                <td>
+                                    <span>@(item.NafdacNo != null ? item.NafdacNo : "NOT STATED")</span>
+                                </td>
+                                <td>
+                                    <span>@(item.ManFactureDate.ToString() != null ? item.ManFactureDate.ToString() : "NOT STATED")</span>
+                                </td>
+
+                                <td>
+                                    <span>@(item.ExpiryDate.ToString() != null ? item.ExpiryDate.ToString() : "NOT STATED")</span>
+                                </td>
+                                <td>
+                                    <span>@(item.UniqueCode != null ? item.UniqueCode: "NOT STATED")</span>
+                                </td>
+
+                                <td class="text-center p-1">
+                                    <a asp-action="Details" asp-controller="Drugs" asp-route-id="@item.Id" class="btn btn-light btn-sm " data-toggle="link" data-placement="top" title="Details">
+                                        <i class="fas fa-desktop"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-controller="Drugs" asp-route-id="@item.Id " class="btn btn-danger btn-sm" data-toggle="link" data-placement="top" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                            </tbody>
+                        </table>
+
+
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+
+</section>
+<!-- /.content -->

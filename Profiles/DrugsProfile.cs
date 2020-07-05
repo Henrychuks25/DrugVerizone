@@ -13,7 +13,7 @@ namespace DrugVerizone.Profiles
         public DrugsProfile()
         {
             CreateMap<Drugs, DrugsViewDto>()
-                .ForMember(dest => dest.Manufacturer,
+                .ForMember(dest => dest.Manufacturers,
                 opt =>
                 {
                     opt.PreCondition(src => src.Manufacturer != null);
