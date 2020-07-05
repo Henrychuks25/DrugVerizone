@@ -18,13 +18,23 @@
                         <thead>
                             <tr>
                                 
-                                <th>@Html.DisplayNameFor(model => model.Name)</th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.NafdacNo)
+                                Drug Name
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.NafdacNo)*@
+                                    NAFDAC No
                                 </th>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.UniqueCode)
+                                    @*@Html.DisplayNameFor(model => model.UniqueCode)*@
+
+                                    Unique Code
+                                </th>
+                                <th>
+                                    @*@Html.DisplayNameFor(model => model.Manufacturer.Name)*@
+
+                                    Manufacturer Name
                                 </th>
                                 
                             </tr>
@@ -44,6 +54,7 @@
                                         <td>@item.Name</td>
                                         <td>@item.NafdacNo</td>
                                         <td>@item.UniqueCode</td>
+                                        <td>@item.Manufacturer.Name</td>
 
                                     </tr>
                                 }
