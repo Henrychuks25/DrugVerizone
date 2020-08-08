@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace DrugVerizone.Services
 {
-    public class cDrugsRepository : IDrugsRepository
+    public class cComplaintsRepository : IComplaintsRepository
     {
         private readonly DrugVerifyContext _context;
         private readonly IMapper _mapper;
 
-        public cDrugsRepository(DrugVerifyContext context, IMapper mapper)
+        public cComplaintsRepository(DrugVerifyContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -43,21 +43,21 @@ namespace DrugVerizone.Services
             });
         }
 
-       
 
-        public async Task<IEnumerable<DrugsViewDto>> Get()
+
+        public async Task<IEnumerable<ComplaintViewDto>> Get()
         {
             return await Task.Run(async () =>
             {
-                var result = await _context.Drugs.Include(m => m.Manufacturer).Include(d=>d.DrugType).ToListAsync<Drugs>();
-                return _mapper.Map<IEnumerable<DrugsViewDto>>(result);
+                var result = await _context.Complaint.ToListAsync<Complaints>();
+                return _mapper.Map<IEnumerable<ComplaintViewDto>>(result);
 
-            }); 
+            });
 
 
         }
 
-        public async Task<DrugsViewDto> ListById(Guid id)
+        public async Task<ComplaintViewDto> ListById(Guid id)
         {
             return await Task.Run(async () =>
            {
@@ -66,45 +66,45 @@ namespace DrugVerizone.Services
                    throw new ArgumentNullException(nameof(id));
                }
 
-               var result = await _context.Drugs.Where(x => x.Id == id).FirstOrDefaultAsync();
+               var result = await _context.Complaint.Where(x => x.Id == id).FirstOrDefaultAsync();
 
-               return _mapper.Map<DrugsViewDto>(result);
+               return _mapper.Map<ComplaintViewDto>(result);
            });
-          
 
-         
+
+
         }
-      
-        public async Task<DrugsViewDto> Create(DrugCreateDto drugs)
+
+        public async Task<ComplaintViewDto> Create(ComplaintsCreateDto drugs)
         {
             return await Task.Run(async () =>
             {
-                if(drugs == null)
+                if (drugs == null)
                 {
                     throw new ArgumentNullException(nameof(drugs));
                 }
-                var drugEntity = _mapper.Map<Drugs>(drugs);
+                var drugEntity = _mapper.Map<Complaints>(drugs);
                 drugEntity.Id = Guid.NewGuid();
-                drugEntity.RegisteredDate = DateTime.Now;
-                _context.Drugs.Add(drugEntity);
+                drugEntity.complaintDate = DateTime.Now;
+                _context.Complaint.Add(drugEntity);
 
                 bool saveDrug = await Save();
-                return _mapper.Map<DrugsViewDto>(drugEntity);
+                return _mapper.Map<ComplaintViewDto>(drugEntity);
             });
         }
 
-       
 
-        public async Task<DrugsViewDto> Update(Guid drugID, DrugUpdateDto drugUpdate)
+
+        public async Task<ComplaintViewDto> Update(Guid drugID, ComplaintsUpdateDto drugUpdate)
         {
             return await Task.Run(async () =>
             {
-                if(drugUpdate == null)
+                if (drugUpdate == null)
                 {
                     throw new ArgumentNullException(nameof(drugUpdate));
                 }
-                var drugEntity = await _context.Drugs.FirstOrDefaultAsync(c => c.Id == drugID);
-                if(drugEntity == null)
+                var drugEntity = await _context.Complaint.FirstOrDefaultAsync(c => c.Id == drugID);
+                if (drugEntity == null)
                 {
                     throw new ArgumentNullException(nameof(drugEntity));
                 }
@@ -112,32 +112,32 @@ namespace DrugVerizone.Services
 
                 bool save = await Save();
 
-                return _mapper.Map<DrugsViewDto>(result);
+                return _mapper.Map<ComplaintViewDto>(result);
             });
         }
 
-        
 
-        public async Task<DrugsViewDto> Delete(Guid drugID)
+
+        public async Task<ComplaintViewDto> Delete(Guid drugID)
         {
             return await Task.Run(async () =>
             {
-                var value = await _context.Drugs.FirstOrDefaultAsync(d => d.Id == drugID);
+                var value = await _context.Complaint.FirstOrDefaultAsync(d => d.Id == drugID);
 
                 if (value == null)
                 {
                     throw new ArgumentNullException(nameof(drugID));
                 }
 
-                _context.Drugs.Remove(value);
+                _context.Complaint.Remove(value);
 
                 await Save();
 
-                return _mapper.Map<DrugsViewDto>(value);
+                return _mapper.Map<ComplaintViewDto>(value);
             });
         }
 
-       
+
 
 
         public async Task<bool> DrugExist(Guid drugId)
@@ -148,28 +148,10 @@ namespace DrugVerizone.Services
                 {
                     throw new ArgumentNullException(nameof(drugId));
                 }
-                return await _context.Drugs.AnyAsync(d => d.Id == drugId);
+                return await _context.Complaint.AnyAsync(d => d.Id == drugId);
             });
         }
 
-        public async Task<IEnumerable<ManufacturerViewDto>> GetMan()
-        {
-            return await Task.Run(async () =>
-            {
-                var result = await _context.Manufacturers.ToListAsync();
-                return _mapper.Map<IEnumerable<ManufacturerViewDto>>(result);
 
-            });
-        }
-
-        public async Task<IEnumerable<DrugTypeViewDto>> GetDrugType()
-        {
-            return await Task.Run(async () =>
-            {
-                var result = await _context.DrugType.ToListAsync();
-                return _mapper.Map<IEnumerable<DrugTypeViewDto>>(result);
-
-            });
-        }
     }
 }

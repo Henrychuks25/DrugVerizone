@@ -21,6 +21,8 @@ namespace DrugVerizone.DbContexts
         //public virtual DbSet<Roles> Roles { get; set; }
       
         public virtual DbSet<Drugs> Drugs { get; set; }
+        public virtual DbSet<Complaints> Complaint { get; set; }
+        public virtual DbSet<DrugTypes> DrugType { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         
     }

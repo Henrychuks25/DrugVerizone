@@ -1,0 +1,74 @@
+﻿@model DrugVerizone.Models.ComplaintViewDto
+
+@{
+    ViewData["Title"] = "Register a Complain";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+
+
+
+
+<!-- Content Header (Page header) -->
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="/"><b>Food Drug</b>Verify</a>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Please drop your complain</p>
+
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <input asp-for="fullName" class="form-control" placeholder="Enter your fullname">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <textarea asp-for="Description" class="form-control" placeholder="Complaint Details">
+                            </textarea>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-sticky-note"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Send</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    
+                </div>
+                <!-- /.login-card-body -->
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <!-- /.login-logo -->
+
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

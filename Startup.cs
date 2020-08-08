@@ -52,6 +52,8 @@ namespace DrugVerizone
                 .AddRazorRuntimeCompilation();
             services.AddScoped<IDrugsRepository, cDrugsRepository>();
             services.AddScoped<IManufacturerRepository, cManufacturerRepository>();
+            services.AddScoped<IComplaintsRepository, cComplaintsRepository>();
+            services.AddScoped<IDrugTypeRepository, cDrugTypeRepository>();
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
         }

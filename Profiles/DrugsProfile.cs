@@ -18,7 +18,14 @@ namespace DrugVerizone.Profiles
                 {
                     opt.PreCondition(src => src.Manufacturer != null);
                     opt.MapFrom(src => src.Manufacturer);
-                });
+                })
+                .ForMember(dest => dest.DrugType,
+                opt =>
+                {
+                    opt.PreCondition(src => src.DrugType != null);
+                    opt.MapFrom(src => src.DrugType);
+                })
+                ;
 
             CreateMap<DrugCreateDto, Drugs>().ReverseMap();
             CreateMap<DrugUpdateDto, Drugs>().ReverseMap();

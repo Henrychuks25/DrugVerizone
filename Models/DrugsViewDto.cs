@@ -20,6 +20,7 @@ namespace DrugVerizone.Models
         public DateTime ExpiryDate { get; set; }
 
         public Guid ManufacturerId { get; set; }
+        public Guid drugTypeId { get; set; }
 
         public DateTime RegisteredDate { get; set; }
 
@@ -28,5 +29,6 @@ namespace DrugVerizone.Models
         [StringLength(6)]
         public string UniqueCode { get; set; }
         public   Manufacturer Manufacturers { get; set; }
+        public   DrugTypes DrugType { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace DrugVerizone.Models
     {
         public Guid Id { get; set; }
         public Guid manufacturerId { get; set; }
+        public Guid drugTypeId { get; set; }
 
         public string Name { get; set; }
 

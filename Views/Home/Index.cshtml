@@ -25,8 +25,14 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                             </li>
-                   
-                           
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Search">Verify Drug</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Complaints" asp-action="Create">Complaints </a>
+                            </li>
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class=" btn btn-primary my-2 my-sm-0 my-account-btn" asp-controller="Accounts" asp-action="Login">Login</a></li>
@@ -111,9 +117,9 @@
             <div class="container">
                 <div class="row">
                    
-                    <div class="col-sm-6 col-md-12 col-lg-12">
+                    <div class="col-sm-6 col-md-12 col-lg-12" id="Search">
                         <div class="form-box">
-                            <form asp-controller="Home" asp-action="Search" method="get">
+                            <form asp-controller="Home" asp-action="Search" method="get" >
                                 <div class="align-items-center">
                                     <div class="col-form-box">
                                         <div class="input-group mb-2">

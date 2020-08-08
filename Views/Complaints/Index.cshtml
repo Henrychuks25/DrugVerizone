@@ -1,6 +1,6 @@
-﻿@model IEnumerable<DrugsViewDto>;
+﻿@model IEnumerable<ComplaintViewDto>;
 @{
-    ViewData["Title"] = "Available Drugs";
+    ViewData["Title"] = "Available Complaints";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -41,14 +41,14 @@
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                    <div class="clearfix mb-3">
+                    @*<div class="clearfix mb-3">
                         <div class="float-right">
                             <a asp-area="" asp-action="Create" class="btn btn-light">
                                 <span><i class="fa fa-plus"></i>  New Drug</span>
 
                             </a>
                         </div>
-                    </div>
+                    </div>*@
 
 
 
@@ -58,16 +58,14 @@
 
                         <thead>
                             <tr role="row">
-                                <td>Name</td>
+                                <td>Name of Complainant</td>
 
-                                <td>Drug Type</td>
 
-                                <td>Manufactured By</td>
-                                <td>NAFDAC No</td>
+
+                                <td>Description of Complaint</td>
                                 
-                                <td>Man. Date</td>
-                                <td>Exp. Date</td>
-                                <td>Unique Code</td>
+                                <td>Complainant Date</td>
+                                
 
                                 <td>Actions</td>
                             </tr>
@@ -78,34 +76,24 @@
                            
 
                             <tr role="row">
-                                <td>@(item.Name != null ? item.Name : "NOT STATED")</td>
+                                <td>@(item.fullName != null ? item.fullName : "NOT STATED")</td>
 
 
+                                
                                 <td>
-                                    <span>@(item.DrugType.Name != null ? item.DrugType.Name : "NOT STATED")</span>
+                                    <span>@(item.Description != null ? item.Description : "NOT STATED")</span>
                                 </td>
                                 <td>
-                                    <span>@(item.Manufacturers.Name != null ? item.Manufacturers.Name : "NOT STATED")</span>
-                                </td>
-                                <td>
-                                    <span>@(item.NafdacNo != null ? item.NafdacNo : "NOT STATED")</span>
-                                </td>
-                                <td>
-                                    <span>@(item.ManFactureDate.ToString() != null ? item.ManFactureDate.ToString() : "NOT STATED")</span>
+                                    <span>@(item.complaintDate.ToString() != null ? item.complaintDate.ToString() : "NOT STATED")</span>
                                 </td>
 
-                                <td>
-                                    <span>@(item.ExpiryDate.ToString() != null ? item.ExpiryDate.ToString() : "NOT STATED")</span>
-                                </td>
-                                <td>
-                                    <span>@(item.UniqueCode != null ? item.UniqueCode: "NOT STATED")</span>
-                                </td>
+                                
 
                                 <td class="text-center p-1">
-                                    <a asp-action="Details" asp-controller="Drugs" asp-route-id="@item.Id" class="btn btn-light btn-sm " data-toggle="link" data-placement="top" title="Details">
+                                    <a asp-action="Details" asp-controller="Complaints" asp-route-id="@item.Id" class="btn btn-light btn-sm " data-toggle="link" data-placement="top" title="Details">
                                         <i class="fas fa-desktop"></i>
                                     </a>
-                                    <a asp-action="Delete" asp-controller="Drugs" asp-route-id="@item.Id " class="btn btn-danger btn-sm" data-toggle="link" data-placement="top" title="Delete">
+                                    <a asp-action="Delete" asp-controller="Complaints" asp-route-id="@item.Id " class="btn btn-danger btn-sm" data-toggle="link" data-placement="top" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>

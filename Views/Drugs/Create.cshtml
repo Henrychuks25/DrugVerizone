@@ -49,68 +49,76 @@
                         @Html.AntiForgeryToken()
 
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-
-                        <div class="row">
+                        <div class="container">
 
                             <div class="col-md-12">
 
-                                <div class="form-group col-6-md">
-                                    <label asp-for="Name">*Drug Name:</label>
-                                    <input minlength="2" maxlength="50" asp-for="Name" class="form-control" placeholder="Enter Name of Drug" required>
+
+
+                                <div class="form-row">
+
+
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="Name">*Drug Name:</label>
+                                        <input minlength="2" maxlength="50" asp-for="Name" class="form-control" placeholder="Enter Name of Drug" required>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label>Drug Type</label>
+                                        <select class="form-control select2" style="width: 100%;" asp-for="drugTypeId" asp-items="@(new SelectList(@ViewBag.typeList,"Id", "Name"))">
+                                            <option value="0"> --- Select Drug Type --- </option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="NafdacNo">*Nafdac No:</label>
+                                        <input minlength="2" maxlength="50" asp-for="NafdacNo" class="form-control" placeholder="Enter NAFDAC Number" required>
+                                    </div>
+
+
+
                                 </div>
 
-                                <div class="form-group col-6-md">
-                                    <label asp-for="NafdacNo">*Nafdac No:</label>
-                                    <input minlength="2" maxlength="50" asp-for="NafdacNo" class="form-control" placeholder="Enter NAFDAC Number" required>
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="UniqueCode">*UniqueCode No:</label>
+                                        <input minlength="2" maxlength="50" asp-for="UniqueCode" class="form-control" placeholder="Enter Unique Code" required>
+                                        <span>This code is used to verify an original drug</span>
+                                    </div>
+
+
+                                    <div class="form-group col-md-6">
+                                        <label>Manufacturer</label>
+                                        <select class="form-control select2" style="width: 100%;" asp-for="ManufacturerId" asp-items="@(new SelectList(@ViewBag.manList,"Id", "Name"))">
+                                            <option value="0"> --- Select Manufacturer --- </option>
+
+                                        </select>
+                                    </div>
+
+
+
                                 </div>
 
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="ManFactureDate">*Manufactured Date:</label>
+                                        <input minlength="2" maxlength="50" asp-for="ManFactureDate" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="ExpiryDate">*Expiry Date:</label>
+                                        <input minlength="2" maxlength="50" asp-for="ExpiryDate" class="form-control" required>
+                                    </div>
 
 
+
+                                </div>
                             </div>
 
-                            <div class="col-md-12">
-
-                                <div class="form-group col-6-md">
-                                    <label asp-for="UniqueCode">*UniqueCode No:</label>
-                                    <input minlength="2" maxlength="50" asp-for="UniqueCode" class="form-control" placeholder="Enter Unique Code" required>
-                                    <span>This code is used to verify an original drug</span>
-                                </div>
-
-
-                                <div class="form-group col-6-md">
-                                    <label>Select Manufacturer</label>
-                                    <select class="form-control select2" style="width: 100%;" asp-for="ManufacturerId" asp-items="@(new SelectList(@ViewBag.manList,"Id", "Name"))">
-                                        <option value="0"> --- Select Manufacturer --- </option>
-
-                                    </select>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="col-md-12">
-
-                                <div class="form-group col-6-md">
-                                    <label asp-for="ManFactureDate">*Manufactured Date:</label>
-                                    <input minlength="2" maxlength="50" asp-for="ManFactureDate" class="form-control" required>
-                                </div>
-
-                                <div class="form-group col-6-md">
-                                    <label asp-for="ExpiryDate">*Expiry Date:</label>
-                                    <input minlength="2" maxlength="50" asp-for="ExpiryDate" class="form-control" required>
-                                </div>
-
-
-
-                            </div>
 
                         </div>
-
-
-
 
 
 

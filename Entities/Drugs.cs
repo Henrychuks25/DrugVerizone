@@ -20,6 +20,7 @@ namespace DrugVerizone.Entities
         public DateTime ExpiryDate { get; set; }
 
         public Guid ManufacturerId { get; set; }
+        public Guid DrugTypeId { get; set; }
 
         [RegularExpression(@"^[A-Za-z][A-Za-z][0-9][0-9]$")]
         [Required]
@@ -28,6 +29,7 @@ namespace DrugVerizone.Entities
         public DateTime RegisteredDate { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
+        public virtual DrugTypes DrugType { get; set; }
 
     }
 }

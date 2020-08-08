@@ -18,5 +18,6 @@ namespace DrugVerizone.Services
         Task<DrugsViewDto> ListById(Guid id);
         Task<bool> Save();
         Task<DrugsViewDto> Update(Guid drugID, DrugUpdateDto drugUpdate);
+        Task<IEnumerable<DrugTypeViewDto>> GetDrugType();
     }
 }

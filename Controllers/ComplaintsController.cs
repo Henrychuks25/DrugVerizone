@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DrugVerizone.Controllers
 {
-    public class DrugsController : Controller
+    public class ComplaintsController : Controller
     {
-        private readonly IDrugsRepository _drugsRepository;
+        private readonly IComplaintsRepository _drugsRepository;
 
-        public DrugsController(IDrugsRepository drugsRepository)
+        public ComplaintsController(IComplaintsRepository drugsRepository)
         {
             _drugsRepository = drugsRepository;
         }
@@ -21,54 +21,37 @@ namespace DrugVerizone.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _drugsRepository.Get();
-            return View( model);
+            return View(model);
         }
 
 
-         
+
         // GET: Drugs/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || id.Value == Guid.Empty)
             {
-                 return BadRequest();
+                return BadRequest();
             }
             var result = await _drugsRepository.ListById(id.Value);
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
 
             }
-                    return View(result);
+            return View(result);
         }
 
         // GET: Drugs/Create
-        public async Task<IActionResult> Create()
+        public ActionResult Create()
         {
-            // Get Manufacturer List
-            List<ManufacturerViewDto> manList = new List<ManufacturerViewDto>();
-
-            var man = await _drugsRepository.GetMan();
-            manList = (from c in man select c).ToList();
-
-            ViewBag.manList = manList;
-
-
-            //Get Drug Type List
-            List<DrugTypeViewDto> typeList = new List<DrugTypeViewDto>();
-
-            var type = await _drugsRepository.GetDrugType();
-            typeList = (from c in type select c).ToList();
-
-            ViewBag.typeList = typeList;
-
             return View();
         }
-       
+
         // POST: Drugs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<DrugsViewDto>> Create(DrugCreateDto model)
+        public async Task<ActionResult<ComplaintViewDto>> Create(ComplaintsCreateDto model)
         {
             if (ModelState.IsValid)
             {
@@ -76,18 +59,18 @@ namespace DrugVerizone.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-           
-                return View();
-           
+
+            return View();
+
         }
 
         // GET: Drugs/Edit/5
 
-        public async Task<ActionResult<DrugsViewDto>> Edit(Guid id)
+        public async Task<ActionResult<ComplaintViewDto>> Edit(Guid id)
         {
             var model = await _drugsRepository.ListById(id);
 
-            if(model == null)
+            if (model == null)
             {
                 return NotFound();
             }
@@ -97,7 +80,7 @@ namespace DrugVerizone.Controllers
         // POST: Drugs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  async Task<ActionResult> Edit(Guid id, DrugUpdateDto drugUpdate)
+        public async Task<ActionResult> Edit(Guid id, ComplaintsUpdateDto drugUpdate)
         {
             try
             {
@@ -105,12 +88,12 @@ namespace DrugVerizone.Controllers
                 await _drugsRepository.Update(id, drugUpdate);
                 return RedirectToAction("Index");
 
-              
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-               
+
             }
             return View();
         }
