@@ -32,20 +32,31 @@ namespace DrugVerizone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var movies = from m in _context.Drugs
+                var result = from m in _context.Drugs
                          select m;
 
 
                     if (!String.IsNullOrEmpty(searchString))
                     {
-                        movies = movies.Where(s => s.UniqueCode.Contains(searchString));
-                        await movies.ToListAsync();
+                        result = result.Where(s => s.UniqueCode.Contains(searchString));
+                        await result.ToListAsync();
                       //  return RedirectToAction("Search", "Home");
-                    return View(await movies.ToListAsync());
-                }
+                        return View(await result.ToListAsync());
+                    }
+
+                  
+                    else
+                    {
+                        return Redirect("Index");
+                    }
             }
            
 
+            return View();
+        }
+
+        public IActionResult Complaint()
+        {
             return View();
         }
 
