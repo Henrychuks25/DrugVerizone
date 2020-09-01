@@ -57,11 +57,16 @@ namespace DrugVerizone.Controllers
             {
                 await _drugsRepository.Create(model);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Success));
             }
 
             return View();
 
+        }
+
+        public IActionResult Success()
+        {
+            return View();
         }
 
         // GET: Drugs/Edit/5
